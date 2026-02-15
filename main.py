@@ -3,7 +3,7 @@ import requests
 import time
 import sys
 
-BASE_URL = "https://radio.pythonanywhere.com"
+BASE_URL = "https://itrc.pythonanywhere.com"
 
 def send_message(channel_id, text):
     url = f"{BASE_URL}/send"
@@ -61,3 +61,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
