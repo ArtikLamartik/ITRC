@@ -5,9 +5,9 @@ import sys
 
 BASE_URL = "https://radio.pythonanywhere.com"
 
-def send_message(thread_key, text):
+def send_message(channel_id, text):
     url = f"{BASE_URL}/send"
-    params = {"key": thread_key}
+    params = {"cid": channel_id}
     payload = {"text": text}
     try:
         resp = requests.post(url, params=params, json=payload, timeout=60)
@@ -18,13 +18,13 @@ def send_message(thread_key, text):
     except Exception as e:
         print(f"Error sending: {e}")
 
-def listen_for_messages(thread_key):
-    print(f"Listening for new messages in '{thread_key}' (Ctrl+C to stop)...")
+def listen_for_messages(channel_id):
+    print(f"Listening for new messages in '{channel_id}' (Ctrl+C to stop)...")
     last_time = 0
     while True:
         try:
             url = f"{BASE_URL}/receive"
-            params = {"key": thread_key}
+            params = {"cid": channel_id}
             resp = requests.get(url, params=params, timeout=60)
             if resp.status_code == 200:
                 message = resp.json()
@@ -43,22 +43,21 @@ def listen_for_messages(thread_key):
         except requests.exceptions.Timeout:
             continue
         except Exception as e:
-            print(f"Connection error: {e}")
-            time.sleep(3)
+            pass
 
 def main():
     parser = argparse.ArgumentParser(description="Radio Messaging Client")
     parser.add_argument("action", choices=["tx", "rx"], help="Action to perform")
-    parser.add_argument("--key", required=True, help="Thread/chat room key")
+    parser.add_argument("--cid", required=True, help="Channel ID")
     parser.add_argument("--text", help="Message text (for 'send')")
     args = parser.parse_args()
     if args.action == "tx":
         if not args.text:
             print("--text is required for 'tx'")
             sys.exit(1)
-        send_message(args.key, args.text)
+        send_message(args.cid, args.text)
     elif args.action == "rx":
-        listen_for_messages(args.key)
+        listen_for_messages(args.cid)
 
 if __name__ == "__main__":
     main()
