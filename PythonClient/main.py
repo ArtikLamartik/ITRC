@@ -1,3 +1,4 @@
+import threading
 import argparse
 import requests
 import time
@@ -12,6 +13,8 @@ except ImportError:
 
 BASE_URL = "https://itrc.pythonanywhere.com"
 
+tts_lock = threading.Lock()
+
 def tx(channel_id, text):
     url = f"{BASE_URL}/tx"
     params = {"cid": channel_id}
@@ -25,34 +28,38 @@ def tx(channel_id, text):
     except Exception as e:
         print(f"[SYS] Error sending: {e}")
 
-def speak_text(text):
-    if not TTS_AVAILABLE:
-        print("[TTS] pyttsx3 not installed. Run: pip install pyttsx3")
-        return
-    try:
-        response = requests.get(BASE_URL, timeout=60)
-        content = response.text
-        abbreviations = {}
-        for line in content.split('\n'):
-            line = line.strip()
-            if ' - ' in line:
-                parts = line.split(' - ', 1)
-                if len(parts) == 2:
-                    abbrev = parts[0].strip()
-                    meaning = parts[1].strip()
-                    if abbrev and meaning:
-                        abbreviations[rf"{abbrev}"] = rf"{meaning}"
-        for abbrev, meaning in abbreviations.items():
-            if abbrev == r"@<cs>":
-                text = re.sub(r"@(\S+)", lambda m: " ".join(list(m.group(1))),text)
-            else:
-                text = re.sub(abbrev, meaning, text)
-        engine = pyttsx3.init()
-        engine.setProperty('rate', 175)
-        engine.say(text)
-        engine.runAndWait()
-    except Exception as e:
-        print(f"[TTS Error] {e}")
+def tts(text):
+    with tts_lock:
+        if not TTS_AVAILABLE:
+            print("[TTS] pyttsx3 not installed. Run: pip install pyttsx3")
+            return
+        if text is None:
+            return
+        try:
+            response = requests.get(BASE_URL, timeout=60)
+            content = response.text
+            abbreviations = {}
+            for line in content.split('\n'):
+                line = line.strip()
+                if ' - ' in line:
+                    parts = line.split(' - ', 1)
+                    if len(parts) == 2:
+                        abbrev = parts[0].strip()
+                        meaning = parts[1].strip()
+                        if abbrev and meaning:
+                            abbreviations[rf"{abbrev}"] = rf"{meaning}"
+            for abbrev, meaning in abbreviations.items():
+                if abbrev == r"@`cs`":
+                    text = re.sub(r"@(\S+)", lambda m: " ".join(list(m.group(1))),text)
+                else:
+                    text = re.sub(abbrev, meaning, text)
+            engine = pyttsx3.init()
+            engine.setProperty('rate', 175)
+            engine.say(text)
+            engine.runAndWait()
+            engine.stop()
+        except Exception as e:
+            print(f"[TTS Error] {e}")
 
 def rx(channel_id, use_tts=False):
     print(f"[SYS] Listening on Channel '{channel_id}' (Ctrl+C to stop)...")
@@ -75,18 +82,17 @@ def rx(channel_id, use_tts=False):
                     msg_text = message['text']
                     print(f"[{t}] `{msg_text}`")
                     if use_tts:
-                        speak_text(msg_text)
+                        threading.Thread(target=tts, args=(msg_text,)).start()
             elif resp.status_code == 500:
                 pass
             else:
                 print(f"[SYS] Server error: {resp.status_code}")
-                time.sleep(2)
-            time.sleep(3)
+            time.sleep(2.1)
         except KeyboardInterrupt:
             print("[SYS] Goodbye!")
-            break
+            sys.exit(0)
         except:
-            time.sleep(3)
+            time.sleep(2.1)
 
 def main():
     parser = argparse.ArgumentParser(description="ITRC Client")
