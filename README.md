@@ -66,6 +66,7 @@ requests
 #### Usage
 
 To Transmit (TX):
+
   ```bash
   python main.py --cid <your Channel ID> tx --text "<your text>"
   ```
@@ -89,7 +90,9 @@ To Transmit (TX):
   ```
 
 To receive (RX):
+
   With TTS:
+
   ```python main.py --cid "<your Channel ID>" rx --tts```
 
   or
@@ -97,6 +100,7 @@ To receive (RX):
   ```python3 main.py --cid "<your Channel ID>" rx --tts```
 
   Example:
+
   ```python main.py --cid "1" rx --tts```
 
   or
@@ -104,6 +108,7 @@ To receive (RX):
   ```python3 main.py --cid "1" rx --tts```
 
   Without TTS:
+
   ```python main.py --cid <your Channel ID> rx```
 
   or
@@ -111,6 +116,7 @@ To receive (RX):
   ```python3 main.py --cid <your Channel ID> rx```
 
   Example:
+
     ```python main.py --cid "1" rx --tts```
 
   or
