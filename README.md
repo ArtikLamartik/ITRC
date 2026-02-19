@@ -8,7 +8,8 @@
     - [To go back to the main page](#Back-to-the-main-page)
   - [The Python Client](#The-Python-Client)
     - [Requirements](#Requirements)
-    - [Steps](#Steps)
+    - [Installation](#Installation)
+    - [Usage](#Usage)
 - [Contributors](#Contributors)
 
 ## How to use ITRC effectively
@@ -50,27 +51,42 @@ You can find it at <a href="https://github.com/ArtikLamartik/ITRC/blob/main/Pyth
 ```
 Python
 pyttsx3
+requests
 ```
 
-#### Steps
-  1. Install Python from <a href="https://www.python.org/">Python.org<\a>
-  2. Install the Python file from <a href="https://github.com/ArtikLamartik/ITRC/blob/main/PythonClient/main.py">PythonClient/main.py<\a>
-  3. Install pyttsx3 with ```pip install pyttsx3```
+#### Installation
+
+1. **Install Python** from [Python.org](https://www.python.org/)
+2. **Download the client** from [PythonClient/main.py](https://github.com/ArtikLamartik/ITRC/blob/main/PythonClient/main.py)
+3. **Install dependencies**:
+   ```bash
+   pip install pyttsx3 requests
+   ```
+
+#### Usage
 
 To Transmit (TX):
-  ```python main.py --cid <your Channel ID> tx --text "<your text>"```
+  ```bash
+  python main.py --cid <your Channel ID> tx --text "<your text>"
+  ```
 
   or
 
-  ```python3 main.py --cid <your Channel ID> tx --text "<your text>"```
+  ```bash
+  python3 main.py --cid <your Channel ID> tx --text "<your text>"
+  ```
 
   Example:
 
-    ```python main.py --cid "1" tx --text "GT, WRLD!"```
+    ```bash
+    python main.py --cid "1" tx --text "GT, WRLD!"
+    ```
   
     or
   
-    ```python3 main.py --cid "1" tx --text "GT, WRLD!"```
+    ```bash
+    python3 main.py --cid "1" tx --text "GT, WRLD!"
+    ```
 
 To receive (RX):
   With TTS:
