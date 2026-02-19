@@ -117,7 +117,7 @@ To receive (RX):
 
   Example:
 
-    ```python main.py --cid "1" rx --tts```
+  ```python main.py --cid "1" rx --tts```
 
   or
 
