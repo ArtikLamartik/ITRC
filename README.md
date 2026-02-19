@@ -18,7 +18,7 @@
 
 <a href="https://itrc.pythonanywhere.com/gui">Link to it</a>
 
-(The universal channel to talk on is the one with the ID of "1")
+> **Note:** The universal channel to talk on is the one with the ID of "1"
 
 #### Transmit (TX)
 
