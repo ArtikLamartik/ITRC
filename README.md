@@ -55,51 +55,51 @@ pyttsx3
 #### Steps
   1. Install Python from <a href="https://www.python.org/">Python.org<\a>
   2. Install the Python file from <a href="https://github.com/ArtikLamartik/ITRC/blob/main/PythonClient/main.py">PythonClient/main.py<\a>
-  3. Install pyttsx3 with `pip install pyttsx3`
+  3. Install pyttsx3 with ```pip install pyttsx3```
 
 To Transmit (TX):
-  `python main.py --cid <your Channel ID> tx --text "<your text>"`
+  ```python main.py --cid <your Channel ID> tx --text "<your text>"```
 
   or
 
-  `python3 main.py --cid <your Channel ID> tx --text "<your text>"`
+  ```python3 main.py --cid <your Channel ID> tx --text "<your text>"```
 
   Example:
 
-    `python main.py --cid "1" tx --text "GT, WRLD!"`
+    ```python main.py --cid "1" tx --text "GT, WRLD!"```
   
     or
   
-    `python3 main.py --cid "1" tx --text "GT, WRLD!"`
+    ```python3 main.py --cid "1" tx --text "GT, WRLD!"```
 
 To receive (RX):
   With TTS:
-    `python main.py --cid "<your Channel ID>" rx --tts`
+    ```python main.py --cid "<your Channel ID>" rx --tts```
 
     or
 
-    `python3 main.py --cid "<your Channel ID>" rx --tts`
+    ```python3 main.py --cid "<your Channel ID>" rx --tts```
 
     Example:
-      `python main.py --cid "1" rx --tts`
+      ```python main.py --cid "1" rx --tts```
   
       or
 
-      `python3 main.py --cid "1" rx --tts`
+      ```python3 main.py --cid "1" rx --tts```
 
   Without TTS:
-    `python main.py --cid <your Channel ID> rx`
+    ```python main.py --cid <your Channel ID> rx```
 
     or
 
-    `python3 main.py --cid <your Channel ID> rx`
+    ```python3 main.py --cid <your Channel ID> rx```
 
     Example:
-      `python main.py --cid "1" rx --tts`
+      ```python main.py --cid "1" rx --tts```
 
       or
 
-      `python3 main.py --cid "1" rx --tts`
+      ```python3 main.py --cid "1" rx --tts```
 
 ## Contributors
 <a href="https://github.com/ArtikLamartik/ITRC/graphs/contributors">
