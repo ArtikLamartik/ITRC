@@ -3,8 +3,8 @@
 ## Table of Contents
 - [How to use ITRC effectively](#How-to-use-ITRC-effectively)
   - [The Web Client](#The-Web-Client)
-    - [To Transmit (TX)](#Transmit)
-    - [To Receive  (RX)](#Receive)
+    - [To Transmit (TX)](#Transmit-tx)
+    - [To Receive  (RX)](#Receive-rx)
     - [To go back to the main page](#Back-to-the-main-page)
 
 ## How to use ITRC effectively
